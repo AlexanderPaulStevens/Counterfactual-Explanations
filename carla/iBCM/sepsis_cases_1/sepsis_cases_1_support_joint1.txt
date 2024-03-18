@@ -1,0 +1,2 @@
+exactly(4-4) last(16-16) not_succession(16-4) init(4-4) succession(4-16) exactly(16-16)
+not_succession(16-6) not_succession(16-5) succession(4-5) exactly(5-5) succession(5-16) not_succession(3-4) co_existence(3-6) succession(4-3) not_succession(6-4) succession(3-16) succession(4-6) succession(6-16) co_existence(3-5) exactly(6-6) co_existence(5-6) not_succession(5-4) not_succession(16-3)
