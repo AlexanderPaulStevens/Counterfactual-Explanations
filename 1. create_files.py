@@ -26,7 +26,6 @@ for dataset_name in datasets:
     #split the data, and generate cases that within a specific range
     train, test = dataset_manager.split_data_strict(data, train_ratio, split="temporal")
 
-    # Assuming 'train' is your DataFrame
     filtered_data = train[train['label'] == 'regular']
     last_event = filtered_data.groupby('Case ID')['event_nr'].idxmax()
     result = filtered_data.loc[last_event, ['Case ID', 'Activity']]
