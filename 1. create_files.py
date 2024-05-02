@@ -33,7 +33,7 @@ for dataset_name in datasets:
     # 'result' now contains the last 'Activity' for each case with the label 'regular'
     print(set(result['Activity']))
 
-    # Assuming 'train' is your DataFrame
+
     filtered_data = train[train['label'] == 'deviant']
     last_event = filtered_data.groupby('Case ID')['event_nr'].idxmax()
     result = filtered_data.loc[last_event, ['Case ID', 'Activity']]
