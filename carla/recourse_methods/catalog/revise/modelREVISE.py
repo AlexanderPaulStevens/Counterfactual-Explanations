@@ -304,7 +304,7 @@ class Revise(RecourseMethod):
             total_loss =  self.hinge_loss_weight*loss1 + self.proximity_weight * loss2 + self.constraint_penalty * violations
 
         elif self.joint_constraint_in_loss==False:
-            total_loss =  self.hinge_loss_weight*loss1 + self.proximity_weight * loss2 + self.constraint_penalty * violations
+            total_loss =  self.hinge_loss_weight*loss1 + self.proximity_weight * loss2
  
         if total_loss <0:
              print('negative loss so you should change the weights')
