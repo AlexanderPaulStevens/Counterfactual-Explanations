@@ -57,6 +57,5 @@ The following ranges were used for hyperparameter optimization:
 
 - The VAE uses a reparameterization trick for sampling from the latent space
 - The model includes both reconstruction loss and KL divergence loss
-- For datasets with process constraints, an additional constraint loss term is added to the training objective
 - The model uses cross-entropy loss for reconstruction
 - Early stopping is implemented with patience of 10 epochs 
