@@ -6,38 +6,57 @@ Link to ArXiv: https://arxiv.org/abs/2403.09232
 
 # Hyperparameter settings
 
-## Model Architecture
-- **Hidden Dimension**: 200 (default)
-- **Latent Size**: Configurable through layers[1]
-- **LSTM Layers**: 5 (default)
-- **Bidirectional**: False
-- **Dropout**: 0.3 (default)
+This section outlines the hyperparameters used for training the LSTM Variational Autoencoder (LSTM VAE) in the project.
 
-## Training Parameters
-- **Learning Rate**: 5e-5 (default)
-- **Epochs**: 500 (default)
-- **Batch Size**: 128 (default)
-- **KL Weight**: 0.3 (default)
-- **Lambda Regularization**: 1e-6 (default)
-- **Gradient Clipping**: max_norm = 5.0
+## General Training Parameters
 
-## Loss Components
-- **Reconstruction Loss**: Cross Entropy Loss
-- **KL Divergence Loss**: Standard VAE KL divergence
-- **Joint Constraint Loss**: Optional, controlled by `joint_constraint_in_loss` parameter
+- **Optimizer**: Adam
+- **Weight Decay (lambda_reg)**: 1e-6
+- **KL Weight**: 0.3 (linearly increases during training)
+- **Gradient Clipping**: 5.0
+- **Batch Size**: 128
+- **Epochs**: 250 (default from training settings)
 
-## Optimizer
-- **Type**: Adam
-- **Weight Decay**: 1e-6 (lambda_reg)
+## Architecture Parameters
 
-## Model Components
-- **Encoder**: LSTM
-- **Decoder**: LSTM
-- **Latent Space**: Gaussian distribution
-- **Output Layer**: Linear layer with LogSoftmax
+The VAE architecture consists of:
+- LSTM-based encoder and decoder
+- Hidden dimension (hidden_dim)
+- Latent dimension (latent_dim)
+- Number of LSTM layers (lstm_size)
+
+## Dataset-Specific Parameters
+
+### BPIC 2012 Datasets (accepted, cancelled, declined)
+- Learning Rate: 0.001
+- Hidden Dimension: 100
+- Latent Dimension: 50
+- LSTM Size: 3
+
+### Production Dataset
+- Learning Rate: 0.05
+- Hidden Dimension: 100
+- Latent Dimension: 50
+- LSTM Size: 1
+
+### BPIC 2015 Datasets
+- Learning Rate: 0.001
+- Hidden Dimension: 100
+- Latent Dimension: 30
+- LSTM Size: 1
+
+## Hyperparameter Search Space
+
+The following ranges were used for hyperparameter optimization:
+- Hidden Dimension: [50, 100]
+- Latent Dimension: [10, 30, 50]
+- LSTM Size: [1, 2, 3, 4, 5]
+- Learning Rate: [0.1, 0.01, 0.05, 0.001]
 
 ## Additional Notes
-- The model supports both CPU and GPU training (automatically selects device)
-- Xavier initialization is used for linear layers
-- The model includes padding handling for variable length sequences
-- Supports both constrained and unconstrained training modes 
+
+- The VAE uses a reparameterization trick for sampling from the latent space
+- The model includes both reconstruction loss and KL divergence loss
+- For datasets with process constraints, an additional constraint loss term is added to the training objective
+- The model uses cross-entropy loss for reconstruction
+- Early stopping is implemented with patience of 10 epochs 
